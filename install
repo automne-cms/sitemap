@@ -1,0 +1,21 @@
+# files to create / update
+>	/automne/classes/modules/cms_sitemap.php
+>	/automne/classes/modules/cms_sitemap/VERSION
+>	/automne/classes/modules/cms_sitemap/sitemap.php
+>	/automne/classes/modules/cms_sitemap/CHANGELOG
+>	/automne/classes/modules/cms_sitemap/page.php
+>	/automne/admin/modules/cms_sitemap/tree-nodes.php
+>	/automne/admin/modules/cms_sitemap/page-controler.php
+>	/automne/admin/modules/cms_sitemap/sitemap.php
+>	/automne/admin/modules/cms_sitemap/sitemap-datas.php
+>	/automne/admin/modules/cms_sitemap/tree.php
+>	/automne/admin/modules/cms_sitemap/index.php
+>	/automne/admin/modules/cms_sitemap/page-properties.php
+>	/automne/admin/modules/cms_sitemap/sitemap-controler.php
+>	/automne/sql/messages/fr/cms_sitemap.sql
+>	/automne/sql/messages/en/cms_sitemap.sql
+>	/automne/sql/mod_cms_sitemap.sql
+#execute installation/update DB script
+x	/automne/sql/messages/fr/cms_sitemap.sql
+x	/automne/sql/messages/en/cms_sitemap.sql
+x	/install.php

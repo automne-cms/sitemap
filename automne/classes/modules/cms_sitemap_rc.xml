@@ -1,0 +1,6 @@
+<cms-module-parameters>
+	<param name="USER_FOR_GENERATION" type="integer">3</param>
+	<param name="CREATE_INDEX" type="boolean">1</param>
+	<param name="INDEX_NAME" type="text">sitemap_index.xml</param>
+	<param name="INDEX_IN_ROBOTS_TXT" type="boolean">1</param>
+</cms-module-parameters>
