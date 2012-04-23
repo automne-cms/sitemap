@@ -460,7 +460,7 @@ class CMS_sitemap extends CMS_grandFather
 			$siblings = CMS_tree::getSiblings($page, false, false);
 			if ($siblings) {
 				foreach ($siblings as $sibling) {
-					if (!isset($pages[$sibling])) {
+					if (!isset($pages[$sibling]) && !CMS_websitesCatalog::isWebsiteRoot($sibling)) {
 						$page = CMS_sitemap_page::getPageByID($sibling);
 						$pages = $pages + $this->_getPagesInfos($page, $user);
 					}
