@@ -72,6 +72,7 @@ $itemsControlerURL = PATH_ADMIN_MODULES_WR.'/'.MOD_CMS_SITEMAP_CODENAME.'/sitema
 
 $jscontent = <<<END
 	var moduleObjectWindow = Ext.getCmp('{$winId}');
+	var fatherWindow = Ext.getCmp('modulecms_sitemapWindow');
 	
 	//define search function into window (to be accessible by parent window)
 	moduleObjectWindow.search = function() {
@@ -127,7 +128,7 @@ $jscontent = <<<END
 					scope:			this
 				},
 				modal:			false,
-				father:			moduleObjectWindow,
+				father:			fatherWindow,
 				width:			750,
 				height:			580,
 				animateTarget:	button,

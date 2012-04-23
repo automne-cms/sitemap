@@ -9,7 +9,7 @@
 // | LICENSE-GPL, and is available through the world-wide-web at		  |
 // | http://www.gnu.org/copyleft/gpl.html.								  |
 // +----------------------------------------------------------------------+
-// | Author: S?stien Pauchet <sebastien.pauchet@ws-interactive.fr>      |
+// | Author: Sébastien Pauchet <sebastien.pauchet@ws-interactive.fr>      |
 // +----------------------------------------------------------------------+
 
 /**
@@ -19,7 +19,7 @@
   *
   * @package Automne
   * @subpackage cms_sitemap
-  * @author S?stien Pauchet <sebastien.pauchet@ws-interactive.fr>
+  * @author Sébastien Pauchet <sebastien.pauchet@ws-interactive.fr>
   */
 
 class CMS_sitemap extends CMS_grandFather
@@ -350,16 +350,16 @@ class CMS_sitemap extends CMS_grandFather
 		$codename = MOD_CMS_SITEMAP_CODENAME;
 		$module = CMS_modulesCatalog::getByCodename($codename);
 		$userId = $module->getParameters('USER_FOR_GENERATION');
-		$cms_user = false;
+		$user = false;
 		if (io::isPositiveInteger($userId)) {
-			$cms_user = CMS_profile_usersCatalog ::getByID($userId);
+			$user = CMS_profile_usersCatalog ::getByID($userId);
 		}
-		if (!$cms_user) {
-			$cms_user = CMS_profile_usersCatalog ::getByID(ANONYMOUS_PROFILEUSER_ID);
+		if (!$user) {
+			$user = CMS_profile_usersCatalog ::getByID(ANONYMOUS_PROFILEUSER_ID);
 		}
 		
-		$page = CMS_sitemap_page::getPageByID($root->getID(), $cms_user);
-		$pagesInfos = $this->_getPagesInfos($page);
+		$page = CMS_sitemap_page::getPageByID($root->getID());
+		$pagesInfos = $this->_getPagesInfos($page, $user);
 		//start XML content
 		$content = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
 		'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'.($this->_namespaces ? ' '.$this->_namespaces : '').'>'."\n";
@@ -376,7 +376,7 @@ class CMS_sitemap extends CMS_grandFather
 		}
 		//add compiled definition content if any
 		if ($this->_definition) {
-			$content .= $this->_compileDefinition($root, $cms_user);
+			$content .= $this->_compileDefinition($root, $user);
 		}
 		//end XML content
 		$content .= '</urlset>';
@@ -407,6 +407,7 @@ class CMS_sitemap extends CMS_grandFather
 			return '';
 		}
 		$blocks = $defXML->getElementsByTagName('block');
+		$GLOBALS['cms_user'] = $cms_user;
 		foreach ($blocks as $block) {
 			$parameters = array();
 			$parameters['public'] = true;
@@ -432,13 +433,13 @@ class CMS_sitemap extends CMS_grandFather
 	  * @return array of pages infos
 	  * @access private
 	  */
-	private function _getPagesInfos($page, $cms_user) {
+	private function _getPagesInfos($page, $user) {
 		$pages = array();
 		if ($page && !$page->hasError()) {
 			$redirectlink = $page->getRedirectLink(true);
 			if ($page->getPublication() == RESOURCE_PUBLICATION_PUBLIC //if page is public
 				&& !$redirectlink->hasValidHREF() //is not a redirection
-				&& (!APPLICATION_ENFORCES_ACCESS_CONTROL || $cms_user->hasPageClearance($page->getID(), CLEARANCE_PAGE_VIEW)) //user has rights to view it
+				&& (!APPLICATION_ENFORCES_ACCESS_CONTROL || $user->hasPageClearance($page->getID(), CLEARANCE_PAGE_VIEW)) //user has rights to view it
 				&& $page->getValue('included') == 1 //is included
 				) {
 				//get last modification date from log
@@ -461,7 +462,7 @@ class CMS_sitemap extends CMS_grandFather
 				foreach ($siblings as $sibling) {
 					if (!isset($pages[$sibling])) {
 						$page = CMS_sitemap_page::getPageByID($sibling);
-						$pages = $pages + $this->_getPagesInfos($page, $cms_user);
+						$pages = $pages + $this->_getPagesInfos($page, $user);
 					}
 				}
 			}

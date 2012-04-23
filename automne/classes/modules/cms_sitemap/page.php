@@ -151,7 +151,10 @@ class CMS_sitemap_page extends CMS_page
 		foreach ($lineage as $pageId) {
 			$page = CMS_sitemap_page::getPageByID($pageId);
 			if ($page->getValue('priority') == 0) {
-				$count++;
+				$redirectlink = $page->getRedirectLink(true);
+				if ($page->getPublication() == RESOURCE_PUBLICATION_PUBLIC && !$redirectlink->hasValidHREF() && $page->getValue('included') == 1) {
+					$count++;
+				}
 			} else {
 				break;
 			}

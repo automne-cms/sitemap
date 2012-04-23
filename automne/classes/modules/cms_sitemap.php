@@ -183,7 +183,6 @@ class CMS_module_CMS_sitemap extends CMS_module
 	  */
 	function generateIndex() {
 		$indexName = $this->getParameters('INDEX_NAME');
-		CMS_grandFather::log($indexName.' - '.substr($indexName, -4));
 		if (!$indexName || substr($indexName, -4) != '.xml') {
 			$indexName = 'sitemap_index.xml';
 		}

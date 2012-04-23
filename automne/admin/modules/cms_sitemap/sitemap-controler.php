@@ -24,6 +24,7 @@
 require_once(dirname(__FILE__).'/../../../../cms_rc_admin.php');
 
 define("MESSAGE_ERROR_MODULE_RIGHTS",570);
+define("MESSAGE_ERROR_SAVING",1701);
 
 //load interface instance
 $view = CMS_view::getInstance();
