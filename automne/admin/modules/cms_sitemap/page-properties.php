@@ -33,7 +33,7 @@ $view->setSecure();
 $winId = sensitiveIO::request('winId');
 $fatherId = sensitiveIO::request('fatherId');
 $pageId = sensitiveIO::request('page', 'io::isPositiveInteger');
-$isPage = sensitiveIO::request('isPage') ? '1' : '0';
+$isPage = sensitiveIO::request('isPage') ? 1 : 0;
 
 //Standard messages
 define("MESSAGE_PAGE_SAVE", 952);
@@ -164,7 +164,7 @@ $pageTitle = io::sanitizeJSString($page->getTitle().' ('.$page->getID().')');
 $jscontent = <<<END
 	var window = Ext.getCmp('{$winId}');
 	
-	if ('{$isPage}' && window) {
+	if ({$isPage} && window) {
 		//if we are in a window context set window title
 		window.setTitle('{$pageTitle}');
 	}
