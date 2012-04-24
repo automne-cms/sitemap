@@ -223,6 +223,7 @@ $jscontent = <<<END
 				text:		'{$cms_language->getJSMessage(MESSAGE_PAGE_GENERATE, false, MOD_CMS_SITEMAP_CODENAME)}',
 				handler:	function(button) {
 					var row = resultsPanel.getSelectionModel().getSelected();
+					resultsPanel.setDisabled(true);
 					Automne.server.call({
 						url:			'{$itemsControlerURL}',
 						params:			{
@@ -231,6 +232,7 @@ $jscontent = <<<END
 						},
 						scope:			this,
 						fcnCallback:	function(response, options, jsonResponse){
+							resultsPanel.setDisabled(false);
 							//reload search
 							moduleObjectWindow.search();
 						}

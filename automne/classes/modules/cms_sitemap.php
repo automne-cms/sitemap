@@ -153,7 +153,7 @@ class CMS_module_CMS_sitemap extends CMS_module
 			//generate sitemap
 			if ($sitemap->generateFile()) {
 				//regenerate sitemaps index if needed
-				$module->generateIndex();
+				$this->generateIndex();
 				return true;
 			}
 		}
