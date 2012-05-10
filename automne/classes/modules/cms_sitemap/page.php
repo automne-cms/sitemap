@@ -156,6 +156,9 @@ class CMS_sitemap_page extends CMS_page
 					$count++;
 				}
 			} else {
+				if( $page->getRedirectLink(false)->hasValidHREF()) {
+					$count--;
+				}
 				break;
 			}
 		}

@@ -1,3 +1,6 @@
+Version 0.2
+-----------
+[BUG] - Root pages with redirect were not handled correctly
 Version 0.1
 -----------
 [Initial import]
