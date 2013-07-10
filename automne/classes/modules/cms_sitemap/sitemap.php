@@ -9,7 +9,7 @@
 // | LICENSE-GPL, and is available through the world-wide-web at		  |
 // | http://www.gnu.org/copyleft/gpl.html.								  |
 // +----------------------------------------------------------------------+
-// | Author: Sébastien Pauchet <sebastien.pauchet@ws-interactive.fr>      |
+// | Author: Sï¿½bastien Pauchet <sebastien.pauchet@ws-interactive.fr>      |
 // +----------------------------------------------------------------------+
 
 /**
@@ -19,7 +19,7 @@
   *
   * @package Automne
   * @subpackage cms_sitemap
-  * @author Sébastien Pauchet <sebastien.pauchet@ws-interactive.fr>
+  * @author Sï¿½bastien Pauchet <sebastien.pauchet@ws-interactive.fr>
   */
 
 class CMS_sitemap extends CMS_grandFather
@@ -330,6 +330,8 @@ class CMS_sitemap extends CMS_grandFather
 	  * @access public
 	  */
 	function generateFile() {
+		$locale = setlocale(LC_ALL,0);
+		setlocale(LC_ALL, 'en_US.UTF-8');
 		//delete old file if any
 		$file = new CMS_file(PATH_REALROOT_FS.'/'.$this->getFileName());
 		if ($file->exists()) {
@@ -387,6 +389,7 @@ class CMS_sitemap extends CMS_grandFather
 		}
 		$file->setContent($content);
 		
+		setlocale(LC_ALL, $locale);		
 		return $file->writeToPersistence();
 	}
 	
